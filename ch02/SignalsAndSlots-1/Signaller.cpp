@@ -1,8 +1,11 @@
 #include "Signaller.h"
+#include <QDebug>
 
 Signaller::Signaller(QObject *parent) : QObject(parent)
 {
-    // this space for rent
+    // connect SimpleSignal (signal) to CatchSimpleSignal (slot)
+    connect(this, &Signaller::SimpleSignal,         // sender
+            this, &Signaller::CatchSimpleSignal);   // receiver
 }
 
 void Signaller::SendSimpleSignal()
@@ -12,5 +15,5 @@ void Signaller::SendSimpleSignal()
 
 void Signaller::CatchSimpleSignal()
 {
-
+    qDebug() << "Got SimpleSignal";
 }
