@@ -1,8 +1,15 @@
 #include "Person.h"
+#include <QVariant>
 
-Person::Person(QObject *parent) : QObject(parent)
+Person::Person(QObject *parent)
+    : QObject(parent),
+      m_name(),
+      m_birthday(),
+      m_heightCm(),
+      m_sex(UNSPECIFIED)
 {
-
+    // tell the metaobject system about our type
+    qRegisterMetaType<Person *>();
 }
 
 QString Person::name() const
