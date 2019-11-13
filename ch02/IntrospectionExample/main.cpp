@@ -47,6 +47,23 @@ int main(int argc, char *argv[])
         qDebug() << propName << "=" << propValue;
     }
 
+    qDebug() << "\n-- Discover Enumerations usng introspection --";
+    auto enumCount = metaObject.enumeratorCount();
+    for (int i = 0; i < enumCount; ++i)
+    {
+        auto metaEnum = metaObject.enumerator(i);
+        auto name = metaEnum.name();
+        auto keyCount = metaEnum.keyCount();
+        QStringList keypairs;
+        for (int j = 0; j < keyCount; ++j)
+        {
+            auto key = metaEnum.key(j);
+            auto value = metaEnum.value(j);
+            keypairs << QString("%1 = %2").arg(key).arg(value);
+        }
+        qDebug() << QString("%1 {%2}").arg(name).arg(keypairs.join(", "));
+    }
+
     qDebug() << "\n-- Discover methods using introspection --";
     auto className = metaObject.className();
     auto methodCount = metaObject.methodCount();
