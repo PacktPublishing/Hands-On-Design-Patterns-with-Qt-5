@@ -51,3 +51,21 @@ void Person::setSex(Person::SexEnum sex)
 {
     m_sex = sex;
 }
+
+void Person::CloneFrom(const Person &p)
+{
+    m_name     = p.m_name;
+    m_birthday = p.m_birthday;
+    m_heightCm = p.m_heightCm;
+    m_sex      = p.m_sex;
+}
+
+void Person::OutputToXML(QString *output)
+{
+    /// @todo Implement Me!
+}
+
+void Person::ReadFromXML(QString input)
+{
+    /// @todo Implement Me!
+}
