@@ -6,7 +6,7 @@ Person::Person(QObject *parent)
       m_name(),
       m_birthday(),
       m_heightCm(),
-      m_sex(UNSPECIFIED)
+      m_gender(UNSPECIFIED)
 {
     // tell the metaobject system about our type
     qRegisterMetaType<Person *>();
@@ -42,14 +42,14 @@ void Person::setHeightCm(int heightCm)
     m_heightCm = heightCm;
 }
 
-Person::SexEnum Person::sex() const
+Person::Genders Person::gender() const
 {
-    return m_sex;
+    return m_gender;
 }
 
-void Person::setSex(Person::SexEnum sex)
+void Person::setGender(Person::Genders sex)
 {
-    m_sex = sex;
+    m_gender = sex;
 }
 
 void Person::CloneFrom(const Person &p)
@@ -57,7 +57,7 @@ void Person::CloneFrom(const Person &p)
     m_name     = p.m_name;
     m_birthday = p.m_birthday;
     m_heightCm = p.m_heightCm;
-    m_sex      = p.m_sex;
+    m_gender      = p.m_gender;
 }
 
 void Person::OutputToXML(QString *output)

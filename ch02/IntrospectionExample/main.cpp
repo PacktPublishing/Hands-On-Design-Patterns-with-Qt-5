@@ -13,13 +13,13 @@ int main(int argc, char *argv[])
     p.setName("John");
     p.setBirthday(QDate::currentDate());
     p.setHeightCm(45);
-    p.setSex(Person::MALE);
+    p.setGender(Person::MALE);
 
     // add a dynamic property to the person
     p.setProperty("nickname", "Johnboy");
 
     qDebug() << "-- retrieve properties via read methods --";
-    qDebug() << p.name() << ":" << p.sex() << ":" << p.birthday()
+    qDebug() << p.name() << ":" << p.gender() << ":" << p.birthday()
              << ":" << p.heightCm();
 
     qDebug() << "\n-- retrieve properties by property names --";

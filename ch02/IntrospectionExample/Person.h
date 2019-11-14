@@ -13,14 +13,14 @@ public:
 
 public:
     // (1) An Enumeration
-    enum SexEnum { MALE, FEMALE, OTHER, UNSPECIFIED };
-    Q_ENUM(SexEnum)
+    enum Genders { MALE, FEMALE, OTHER, UNSPECIFIED };
+    Q_ENUM(Genders)
 
     // (2) Property Definitions
     Q_PROPERTY(QString name     READ name     WRITE setName)
     Q_PROPERTY(QDate   birthday READ birthday WRITE setBirthday)
     Q_PROPERTY(int     heightCm READ heightCm WRITE setHeightCm)
-    Q_PROPERTY(SexEnum sex      READ sex      WRITE setSex)
+    Q_PROPERTY(Genders gender   READ gender   WRITE setGender)
 
     // (3) Add Detail about the class
     Q_CLASSINFO("author", "John Werner")
@@ -37,8 +37,8 @@ public:
     int heightCm() const;
     void setHeightCm(int heightCm);
 
-    SexEnum sex() const;
-    void setSex(SexEnum sex);
+    Genders gender() const;
+    void setGender(Genders gender);
 
     // (5) Discoverable Methods
     Q_INVOKABLE void CloneFrom(const Person &p);
@@ -53,7 +53,7 @@ private:
     QString     m_name;     ///< name of the person
     QDate       m_birthday; ///< the person's birthday
     int         m_heightCm; ///< the person's height (in cm)
-    SexEnum     m_sex;      ///< the person's sex
+    Genders     m_gender;   ///< the person's gender
 };
 
 // Pass QObjects via pointer, or define copy constructor
