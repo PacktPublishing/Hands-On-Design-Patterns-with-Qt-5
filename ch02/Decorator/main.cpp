@@ -5,6 +5,17 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    // Set the Identity of the application (just good form)
+    a.setOrganizationName("Packt");
+    a.setApplicationName("Decorator");
+
+    // Set how qDebug() displays
+    QString logFormatVerbose  ("%{time yyyy-MM-dd hh:mm:ss.zzz} | [%{if-debug}D%{endif}%{if-info}I%{endif}%{if-warning}W%{endif}%{if-critical}C%{endif}%{if-fatal}F%{endif}] | %{function} [%{file}(%{line})] | %{message}");
+    QString logFormatTimeStamp("%{time yyyy-MM-dd hh:mm:ss.zzz} | [%{if-debug}D%{endif}%{if-info}I%{endif}%{if-warning}W%{endif}%{if-critical}C%{endif}%{if-fatal}F%{endif}] | %{message}");
+    qSetMessagePattern(logFormatTimeStamp);
+
+
     MainWindow w;
     w.show();
     return a.exec();
