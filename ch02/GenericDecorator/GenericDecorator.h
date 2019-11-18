@@ -43,9 +43,9 @@ public:
     virtual ~Decorator1() = default;
 
     virtual void operation()  {
-        qDebug() << "Decorator1: Before we call m_comp->opreation()";
+        qDebug() << "Decorator1: Before we call m_comp->operation()";
         m_comp->operation();
-        qDebug() << "Decorator1: After we call m_comp->opreation()";
+        qDebug() << "Decorator1: After we call m_comp->operation()";
     }
 };
 
@@ -57,9 +57,9 @@ public:
     virtual ~Decorator2() = default;
 
     virtual void operation()  {
-        qDebug() << "Decorator2: Before we call m_comp->opreation()";
+        qDebug() << "Decorator2: Before we call m_comp->operation()";
         m_comp->operation();
-        qDebug() << "Decorator2: After we call m_comp->opreation()";
+        qDebug() << "Decorator2: After we call m_comp->operation()";
     }
 };
 
