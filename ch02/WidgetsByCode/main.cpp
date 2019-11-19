@@ -4,24 +4,27 @@
 
 int main(int argc, char *argv[])
 {
+    // (1) define our Qt (GUI) Application
     QApplication    a(argc, argv);
 
-    // define our window with a label
+    // (2) define the window to put the label in
     QMainWindow w;
 
-    auto label = new QLabel;
-    label->setObjectName("hello");
-    label->setText("Hello World!");
+    auto label = new QLabel;        // (3) create a label
+    label->setObjectName("hello");  // (4) assign an id to it
+    label->setText("Hello World!"); // (5) set the text of it
 
-    // set the color
+    // (6) set the text color by manipulating the palette
     auto palette = label->palette();
     palette.setColor(label->foregroundRole(), Qt::blue);
     label->setPalette(palette);
 
-    // assign to the window, w
+    // (7) assign the label to the window, w
     w.setCentralWidget(label);
 
+    // (8) show the window
     w.show();
 
+    // (9) start Qt’s event loop and exit when it finishes
     return a.exec();
 }
