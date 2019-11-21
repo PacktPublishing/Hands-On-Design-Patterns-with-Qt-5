@@ -2,19 +2,19 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 1.6
 
-Window {
+Window {                            // (1) define the window
     id: window
     visible: true
     width: 640
     height: 480
     title: qsTr("Hello World")
 
-    Label {
+    Label {                         // (2) define the Label in window
         id: hello
         x: 32
         y: 184
-        color: "#0800ff"
-        text: qsTr("Hello World!")
+        color: "#0800ff"            // (3) blue by rgb code
+        text: qsTr("Hello World!")  // (3) translatable text
     }
 }
 
