@@ -13,7 +13,7 @@ Window {
         id: hello
         x: 32
         y: 184
-        color: "orange"
+        color: "#0800ff"
         text: qsTr("Hello World!")
     }
 }
