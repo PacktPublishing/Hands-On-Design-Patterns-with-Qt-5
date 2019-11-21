@@ -11,10 +11,10 @@ Window {                            // (1) define the window
 
     Label {                         // (2) define the Label in window
         id: hello
-        x: 32
+        x: 32                       // (3) the location of the text
         y: 184
-        color: "#0800ff"            // (3) blue by rgb code
-        text: qsTr("Hello World!")  // (3) translatable text
+        color: "#0800ff"            // (4) blue by rgb code
+        text: qsTr("Hello World!")  // (5) translatable text
     }
 }
 
