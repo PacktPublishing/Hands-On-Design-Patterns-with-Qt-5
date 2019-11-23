@@ -1,2 +1,6 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>43183511045_46fa6859b8_c.jpg</file>
+        <file>MyQML.qml</file>
+    </qresource>
+</RCC>
