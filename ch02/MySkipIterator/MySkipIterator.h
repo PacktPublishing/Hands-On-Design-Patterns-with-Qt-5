@@ -17,9 +17,9 @@ public:
     void setSkipValue(int skipValue);
 
 private:
-    int         m_pos;
-    int         m_skipValue;
-    QList<T>    *m_list;
+    int         m_pos;          ///< Where we are in the container
+    int         m_skipValue;    ///< how many to skip
+    QList<T>    *m_list;        ///< the container
 };
 
 template<class T>
