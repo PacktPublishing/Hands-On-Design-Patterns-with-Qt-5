@@ -22,9 +22,8 @@ public:
 private:
     QVector<T>      *m_deck;
     int             m_decksize;
-    QVector<bool>   m_used;
+    QBitArray       m_used;
     int             m_pos;
-    int             m_count;
 };
 
 
@@ -40,23 +39,25 @@ template<class T>
 void ShuffleIterator<T>::Reshuffle()
 {
     m_used.fill(false, m_decksize);
-    m_count = 0;
-    next();
+    m_pos = 0;
 }
 
 template<class T>
 void ShuffleIterator<T>::next()
 {
-    ++m_count;      // used one more item
-    do {
-        m_pos = qrand() % m_decksize;
-    } while (m_used[m_pos] == true);
+    if (hasNext())
+    {
+        do {
+            m_pos = qrand() % m_decksize;
+        } while (m_used[m_pos] == true);
+        m_used[m_pos] = true;
+    }
 }
 
 template<class T>
 bool ShuffleIterator<T>::hasNext() const
 {
-    return (m_count < m_decksize);
+    return (m_used.count(false) != 0);
 }
 
 template<class T>

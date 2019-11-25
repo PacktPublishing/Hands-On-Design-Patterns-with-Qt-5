@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
         iter.Reshuffle();
         while (iter.hasNext())
         {
-            res << iter.currentItem();
             iter.next();
+            res << iter.currentItem();
         }
-        qDebug() << res;
+        qDebug() << i+1 << ":" << res;
     }
 
     return 0;
