@@ -3,7 +3,7 @@
 
 #include <QTimer>
 
-Vehicle::Vehicle()
+Vehicle::Vehicle(QObject *parent)
     : QObject(parent),
       m_speed(0.0),
       m_accel(0.5)
