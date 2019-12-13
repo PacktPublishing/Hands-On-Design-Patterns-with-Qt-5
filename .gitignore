@@ -1,1 +1,4 @@
 /ch02/SignalsAndSlots-1/SignalsAndSlots-1.pro.user
+*.user
+moc_*.h
+ui_*.h
