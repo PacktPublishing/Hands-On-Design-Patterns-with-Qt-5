@@ -17,6 +17,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Broker.cpp \
+    Publisher.cpp \
+    Speedometer.cpp \
+    Subscriber.cpp \
+    Subscription.cpp \
+    Vehicle.cpp \
     main.cpp \
     MainWindow.cpp
 
@@ -24,9 +29,11 @@ HEADERS += \
     Broker.h \
     MainWindow.h \
     Publisher.h \
+    Speedometer.h \
     Subscriber.h \
     Subscription.h \
-    Topic.h
+    Topic.h \
+    Vehicle.h
 
 FORMS += \
     MainWindow.ui

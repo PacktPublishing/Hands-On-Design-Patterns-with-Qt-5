@@ -1,18 +1,21 @@
+#ifndef PUBLISHER_H_INCLUDED
+#define PUBLISHER_H_INCLUDED
+
 #include "Broker.h"
 
 class Publisher
 {
 public:
-    Publisher() : m_broker(nullptr) {}
+    Publisher();
     virtual ~Publisher() = default;
 
-    Broker *broker() const          { return m_broker; }
-    void setBroker(Broker *broker)  { m_broker = broker; }
+    virtual Broker *broker() const;
+    virtual void setBroker(Broker *broker);
 
-    void notify(Topic topic);
+    virtual void notify(Topic topic);
 
 protected:
     Broker* m_broker;
 };
 
-
+#endif

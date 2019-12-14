@@ -1,3 +1,6 @@
+#ifndef BROKER_H_INCLUDED
+#define BROKER_H_INCLUDED
+
 #include "Subscription.h"
 #include "Subscriber.h"
 #include "Topic.h"
@@ -6,6 +9,7 @@
 
 class Broker
 {
+public:
     Broker();
     ~Broker() = default;
 
@@ -17,3 +21,5 @@ class Broker
 private:
     QList<Subscription>   m_subscriptions;
 };
+
+#endif
