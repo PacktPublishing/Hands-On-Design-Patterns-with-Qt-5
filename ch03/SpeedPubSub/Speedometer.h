@@ -11,9 +11,7 @@ public:
     ~Speedometer();
 
     void setBroker(Broker *broker) override;
-
     void update(Topic a_topic) final;
-
 };
 
 #endif // SPEEDOMETER_H
