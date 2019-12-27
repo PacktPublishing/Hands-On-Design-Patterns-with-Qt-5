@@ -1,6 +1,7 @@
 #include "Vehicle.h"
 
 #include <QTimer>
+#include <QDateTime>
 
 Vehicle::Vehicle(QObject *parent)
     : QObject(parent),
@@ -23,6 +24,8 @@ Vehicle::Vehicle(QObject *parent)
                 postUpdate(Topic{"fuelUsage", m_fuelUsage});
             });
     m_notificationTimer->start();
+
+    qsrand(QDateTime::currentSecsSinceEpoch());
 }
 
 void Vehicle::setBlackboard(Blackboard *a_blackboard)

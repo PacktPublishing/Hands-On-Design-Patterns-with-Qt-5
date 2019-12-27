@@ -28,7 +28,9 @@ void FuelUsageCalc::act(Topic a_topic)
         auto time = a_topic.data.toDateTime();
         auto secs = time.toSecsSinceEpoch() - m_time.toSecsSinceEpoch();
         m_time = time;
-        postUpdate({"fuelPerSec", m_fuelUsage / secs});
+        if (secs != 0) {
+            postUpdate({"fuelPerSec", m_fuelUsage / secs});
+        }
     }
 
 }
