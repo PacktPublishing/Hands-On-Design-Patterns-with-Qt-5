@@ -2,7 +2,6 @@
 #define VEHICLE_H
 
 #include <QObject>
-#include <QList>
 #include "Publisher.h"
 
 class QTimer;
@@ -23,7 +22,6 @@ public slots:
     // Nothing for now
 
 private:
-    QList<Observer *>   m_observers;
     double              m_speed;
     double              m_accel;
     double              m_distance;
