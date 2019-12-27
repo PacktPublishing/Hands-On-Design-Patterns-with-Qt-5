@@ -16,11 +16,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Blackboard.cpp \
+    Controller.cpp \
+    FuelUsageCalc.cpp \
+    FuelUsageDisp.cpp \
+    KnowledgeSource.cpp \
+    Odometer.cpp \
+    Speedometer.cpp \
+    Vehicle.cpp \
     main.cpp \
     MainWindow.cpp
 
 HEADERS += \
-    MainWindow.h
+    Blackboard.h \
+    Controller.h \
+    FuelUsageCalc.h \
+    FuelUsageDisp.h \
+    KnowledgeSource.h \
+    MainWindow.h \
+    Odometer.h \
+    Speedometer.h \
+    Topic.h \
+    Vehicle.h
 
 FORMS += \
     MainWindow.ui
