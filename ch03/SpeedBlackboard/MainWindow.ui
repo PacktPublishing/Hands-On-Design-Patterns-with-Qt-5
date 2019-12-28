@@ -23,7 +23,17 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3,1">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,2,1">
+      <item>
+       <widget class="FuelUsageDisp" name="fuelUsage" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
@@ -39,6 +49,12 @@
       </item>
       <item>
        <widget class="QGroupBox" name="groupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="title">
          <string>Distance</string>
         </property>
@@ -106,6 +122,12 @@
    <class>Odometer</class>
    <extends>QLCDNumber</extends>
    <header>Odometer.h</header>
+  </customwidget>
+  <customwidget>
+   <class>FuelUsageDisp</class>
+   <extends>QWidget</extends>
+   <header>FuelUsageDisp.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

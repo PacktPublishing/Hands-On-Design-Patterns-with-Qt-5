@@ -40,6 +40,7 @@ HEADERS += \
     Vehicle.h
 
 FORMS += \
+    FuelUsageDisp.ui \
     MainWindow.ui
 
 # Default rules for deployment.

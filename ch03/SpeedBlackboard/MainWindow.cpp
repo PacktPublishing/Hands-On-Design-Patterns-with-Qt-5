@@ -23,15 +23,14 @@ MainWindow::MainWindow(QWidget *parent)
     auto fcalc = new FuelUsageCalc;
     fcalc->setBlackboard(blackboard);
 
-    auto fdisp = new FuelUsageDisp;
-    fdisp->setBlackboard(blackboard);
+    ui->fuelUsage->setBlackboard(blackboard);
 
     auto controller = new Controller(this);
     controller->setBlackboard(blackboard);
     controller->setSpeedo(ui->speedo);
     controller->setOdo(ui->odo);
     controller->setFuelUsageCalc(fcalc);
-    controller->setFuelUsageDisp(fdisp);
+    controller->setFuelUsageDisp(ui->fuelUsage);
 }
 
 MainWindow::~MainWindow()

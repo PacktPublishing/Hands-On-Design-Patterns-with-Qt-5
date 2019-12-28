@@ -2,8 +2,8 @@
 #include "Blackboard.h"
 
 Speedometer::Speedometer(QWidget *parent)
-    : KnowledgeSource(),
-      QLCDNumber(parent)
+    : QLCDNumber(parent),
+      KnowledgeSource()
 {
     setDigitCount(5);
     setSmallDecimalPoint(true);

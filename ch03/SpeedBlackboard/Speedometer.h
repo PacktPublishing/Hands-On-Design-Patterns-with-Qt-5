@@ -4,7 +4,7 @@
 #include "KnowledgeSource.h"
 #include <QLCDNumber>
 
-class Speedometer : public KnowledgeSource, public QLCDNumber
+class Speedometer : public QLCDNumber, public KnowledgeSource
 {
 public:
     Speedometer(QWidget* parent = nullptr);

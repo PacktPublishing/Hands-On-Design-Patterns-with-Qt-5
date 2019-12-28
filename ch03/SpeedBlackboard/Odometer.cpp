@@ -2,8 +2,8 @@
 #include "Blackboard.h"
 
 Odometer::Odometer(QWidget *parent)
-    : KnowledgeSource(),
-      QLCDNumber(parent)
+    : QLCDNumber(parent),
+    KnowledgeSource()
 {
     setDigitCount(7);
     setSmallDecimalPoint(true);
