@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" name="CruiseControlStateMachine" qt:editorversion="4.11.0" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" initial="Off">
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="CruiseControlStateMachine" qt:editorversion="4.11.0">
     <state id="Off">
-        <qt:editorinfo geometry="121.43;329.32;-60;-50;120;100" scenegeometry="121.43;329.32;61.43;279.32;120;100"/>
+        <qt:editorinfo geometry="121.43;329.32;-60;-50;120;100" stateColor="#edf7f2" scenegeometry="121.43;329.32;61.43;279.32;120;100"/>
         <transition type="external" event="set" target="Okay">
             <qt:editorinfo movePoint="-22;1"/>
         </transition>
         <transition type="external" event="resume" target="Okay">
-            <qt:editorinfo movePoint="-58;10" localGeometry="0.08;-80.46;217.70;-80.46"/>
+            <qt:editorinfo localGeometry="0.08;-80.46;217.70;-80.46" movePoint="-58;10"/>
         </transition>
     </state>
     <state id="On" initial="Maintain">
-        <qt:editorinfo geometry="520.73;143.78;-295.72;-173.72;717.92;629.52" scenegeometry="520.73;143.78;225.01;-29.94;717.92;629.52"/>
+        <qt:editorinfo geometry="520.73;142.73;-295.72;-173.72;717.92;629.52" stateColor="#edf7f2" scenegeometry="520.73;142.73;225.01;-30.99;717.92;629.52"/>
         <state id="Decel">
             <qt:editorinfo geometry="333.28;339.38;-60;-50;120;100" scenegeometry="854.01;483.16;794.01;433.16;120;100"/>
             <transition type="external" event="slowerReleased" target="Wait">
-                <qt:editorinfo movePoint="69;-24" localGeometry="-92.67;-134.16"/>
+                <qt:editorinfo localGeometry="-92.99;-148.60" movePoint="69;-24"/>
             </transition>
         </state>
         <state id="Accel">
             <qt:editorinfo geometry="333.28;31.88;-60;-50;120;100" scenegeometry="854.01;175.66;794.01;125.66;120;100"/>
             <transition type="external" event="fasterReleased" target="Wait">
-                <qt:editorinfo movePoint="43;26" localGeometry="-92.05;130.34"/>
+                <qt:editorinfo localGeometry="-91.76;130.34" movePoint="43;26"/>
             </transition>
         </state>
         <state id="Maintain" initial="Okay">
@@ -45,10 +45,10 @@
                 <qt:editorinfo geometry="-160.13;-2.67;-60;-50;120;100" scenegeometry="339.12;329.32;279.12;279.32;120;100"/>
                 <transition type="external" event="tooSlow" target="IncreaseSpeed"/>
                 <transition type="external" event="tooFast" target="DecreaseSpeed">
-                    <qt:editorinfo movePoint="-22;39" endTargetFactors="26.86;46.48"/>
+                    <qt:editorinfo endTargetFactors="26.86;46.48" movePoint="-22;39"/>
                 </transition>
                 <transition type="external" event="brake" target="Off">
-                    <qt:editorinfo movePoint="73;-17" localGeometry="0;78.68;-218.12;78.68"/>
+                    <qt:editorinfo localGeometry="0;79.73;-217.94;79.73" movePoint="73;-17"/>
                 </transition>
             </state>
             <state id="DecreaseSpeed">
