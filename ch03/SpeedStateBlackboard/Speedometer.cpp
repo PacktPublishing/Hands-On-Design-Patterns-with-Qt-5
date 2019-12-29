@@ -1,9 +1,9 @@
 #include "Speedometer.h"
-#include "Broker.h"
+#include "Blackboard.h"
 
 Speedometer::Speedometer(QWidget *parent)
-    : Subscriber(),
-      QLCDNumber(parent)
+    : QLCDNumber(parent),
+      KnowledgeSource()
 {
     setDigitCount(5);
     setSmallDecimalPoint(true);
@@ -12,16 +12,14 @@ Speedometer::Speedometer(QWidget *parent)
 
 Speedometer::~Speedometer()
 {
-    m_broker->unregisterSub(this, Topic{"speed", QVariant()});
 }
 
-void Speedometer::setBroker(Broker *broker)
+void Speedometer::setBlackboard(Blackboard *a_blackboard)
 {
-    Subscriber::setBroker(broker);  // (Decorator Pattern)
-    m_broker->registerSub(this, Topic{"speed", QVariant()});
+    KnowledgeSource::setBlackboard(a_blackboard);  // (Decorator Pattern)
 }
 
-void Speedometer::update(Topic a_topic)
+void Speedometer::act(Topic a_topic)
 {
     auto name = a_topic.name;
     auto val = a_topic.data.value<double>();

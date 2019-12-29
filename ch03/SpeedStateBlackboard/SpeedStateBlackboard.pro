@@ -16,28 +16,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Broker.cpp \
+    Blackboard.cpp \
+    Controller.cpp \
+    FuelUsageCalc.cpp \
+    FuelUsageDisp.cpp \
+    KnowledgeSource.cpp \
     Odometer.cpp \
-    Publisher.cpp \
     Speedometer.cpp \
-    Subscriber.cpp \
-    Subscription.cpp \
     Vehicle.cpp \
     main.cpp \
     MainWindow.cpp
 
 HEADERS += \
-    Broker.h \
+    Blackboard.h \
+    Controller.h \
+    FuelUsageCalc.h \
+    FuelUsageDisp.h \
+    KnowledgeSource.h \
     MainWindow.h \
     Odometer.h \
-    Publisher.h \
     Speedometer.h \
-    Subscriber.h \
-    Subscription.h \
     Topic.h \
     Vehicle.h
 
 FORMS += \
+    FuelUsageDisp.ui \
     MainWindow.ui
 
 # Default rules for deployment.

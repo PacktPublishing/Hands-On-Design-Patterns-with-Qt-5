@@ -2,18 +2,24 @@
 #define VEHICLE_H
 
 #include <QObject>
-#include "Publisher.h"
+#include "KnowledgeSource.h"
 
 class QTimer;
 class Observer;
 
 /// @note QObject must be first in inheritance tree!
-class Vehicle : public QObject, public Publisher
+class Vehicle : public QObject, public KnowledgeSource
 {
     Q_OBJECT
 
 public:
     explicit Vehicle(QObject *parent = nullptr);
+
+    void setBlackboard(Blackboard *a_blackboard) final;
+    void act(Topic a_topic) final;
+
+protected:
+    void postUpdate(Topic a_topic) final;
 
 signals:
     // Nothing for now
@@ -26,6 +32,7 @@ private:
     double              m_accel;
     double              m_distance;
     double              m_heading;
+    double              m_fuelUsage;
 
     QTimer *            m_notificationTimer;
 
