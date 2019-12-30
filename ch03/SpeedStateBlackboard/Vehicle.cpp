@@ -49,7 +49,7 @@ void Vehicle::adjustSpeed()
     m_distance += m_speed;  // dist = sum(speed/time)
     m_fuelUsage += 0.23;
 
-    m_accel += ((qrand() % 41) - 20) / 20.0;
+    m_accel += ((qrand() % 401) - 198) / 200.0;
     m_speed += m_accel;
     if (m_speed < 0.0)
     {

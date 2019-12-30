@@ -45,6 +45,8 @@ void Controller::Observe()
         mt_heading       = m_blackboard->inspect("heading");
         mt_fuelUsage     = m_blackboard->inspect("fuelUsage");
         mt_fuelPerDist   = m_blackboard->inspect("fuelPerDist");
+        mt_fuelPerSec    = m_blackboard->inspect("fuelPerSec");
+        mt_distPerFuel   = m_blackboard->inspect("distPerFuel");
     }
     // call the next stage after a tiny wait
     QTimer::singleShot(1, this, &Controller::Orient);
@@ -81,6 +83,9 @@ void Controller::Act()
     }
     if (m_fuelUsageDisp) {
         m_fuelUsageDisp->act(mt_fuelPerDist);
+        m_fuelUsageDisp->act(mt_fuelPerSec);
+        m_fuelUsageDisp->act(mt_fuelUsage);
+        m_fuelUsageDisp->act(mt_distPerFuel);
     }
 }
 

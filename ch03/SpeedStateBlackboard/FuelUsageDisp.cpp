@@ -1,11 +1,17 @@
 #include "FuelUsageDisp.h"
 #include "ui_FuelUsageDisp.h"
 
+#include <QScxmlStateMachine>
+
 FuelUsageDisp::FuelUsageDisp(QWidget *parent)
     : QWidget(parent),
       KnowledgeSource(),
       ui(new Ui::FuelUsageDisp),
-      m_mode(FuelUsageDisp::Overall)
+      m_modeSM(nullptr),
+      m_perSec(0.0),
+      m_perDist(0.0),
+      m_total(0.0),
+      m_perFuel(0.0)
 {
     ui->setupUi(this);
     ui->lcdNumber->setDecMode();
@@ -30,31 +36,69 @@ void FuelUsageDisp::act(Topic a_topic)
     QString text = "-999.99";
     text = QString::number(val, 'f', 4);
 
-    if ((name == "fuelPerSec") && (m_mode == PerSec)) {
-        text = QString::number(val, 'f', 6);
+    if (name == "fuelPerSec") {
+        m_perSec = val;
     }
-    else if ((name == "fuelPerdist") && (m_mode == Overall)) {
-        text = QString::number(val, 'f', 6);
+    else if (name == "fuelPerDist") {
+        m_perDist = val;
     }
-    ui->lcdNumber->display(text);
+    else if (name == "fuelUsage") {
+        m_total = val;
+    }
+    else if (name == "distPerFuel") {
+        m_perFuel = val;
+    }
+    updateMode();   // for re-display
 }
 
 void FuelUsageDisp::nextMode()
 {
-    QString boxText = "unknown";
-    switch(m_mode)
+    if (m_modeSM)
     {
-    case FuelUsageDisp::Overall:
-        m_mode = PerSec;
-        boxText = "Fuel / Sec";
-        break;
-
-    case FuelUsageDisp::PerSec:
-        m_mode = Overall;
-        boxText = "Fuel / Dist";
-        break;
+        m_modeSM->submitEvent("Next");
     }
+}
 
-    ui->modeButton->setText(QVariant::fromValue(m_mode).toString());
-    ui->fuelBox->setTitle(boxText);
+void FuelUsageDisp::updateMode()
+{
+    if (m_modeSM)
+    {
+        auto mode = m_modeSM->activeStateNames();
+        ui->fuelBox->setTitle(mode.first());
+
+        QString numText = "----";
+        if (mode.contains("PerDistance"))
+        {
+            numText = QString::number(m_perDist, 'f', 4);
+        }
+        else if (mode.contains("PerSecond"))
+        {
+            numText = QString::number(m_perSec, 'f', 4);
+
+        }
+        else if (mode.contains("Total"))
+        {
+            numText = QString::number(m_total, 'f', 6);
+        }
+        else if (mode.contains("DistPerFuel"))
+        {
+            numText = QString::number(m_perFuel, 'f', 6);
+        }
+        ui->lcdNumber->display(numText);
+    }
+}
+
+
+QScxmlStateMachine *FuelUsageDisp::modeSM() const
+{
+    return m_modeSM;
+}
+
+void FuelUsageDisp::setModeSM(QScxmlStateMachine *modeSM)
+{
+    m_modeSM = modeSM;
+    m_modeSM->init();
+    connect(m_modeSM, &QScxmlStateMachine::reachedStableState,
+            this, &FuelUsageDisp::updateMode);
+    m_modeSM->start();
 }

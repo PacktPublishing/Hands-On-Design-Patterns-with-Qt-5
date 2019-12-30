@@ -38,6 +38,8 @@ private:
     Topic       mt_fuelUsage;
     Topic       mt_heading;
     Topic       mt_fuelPerDist;
+    Topic       mt_fuelPerSec;
+    Topic       mt_distPerFuel;
 
     KnowledgeSource *m_speedo;
     KnowledgeSource *m_odo;

@@ -5,6 +5,7 @@
 #include "Controller.h"
 #include "FuelUsageCalc.h"
 #include "FuelUsageDisp.h"
+#include "FuelDisplayStateMachine.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     fcalc->setBlackboard(blackboard);
 
     ui->fuelUsage->setBlackboard(blackboard);
+    ui->fuelUsage->setModeSM(new FuelDisplayStateMachine(this));
 
     auto controller = new Controller(this);
     controller->setBlackboard(blackboard);

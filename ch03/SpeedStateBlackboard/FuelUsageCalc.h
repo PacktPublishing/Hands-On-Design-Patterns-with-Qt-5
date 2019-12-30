@@ -19,7 +19,7 @@ protected:
 private:
     double  m_distance;
     double  m_fuelUsage;
-    QDateTime   m_time;
+    QDateTime   m_startTime;
 };
 
 #endif // MILEAGECALCULATOR_H
