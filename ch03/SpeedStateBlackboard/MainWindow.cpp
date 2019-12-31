@@ -27,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->fuelUsage->setBlackboard(blackboard);
     ui->fuelUsage->setModeSM(new FuelDisplayStateMachine(this));
 
+    ui->throttle->setBlackboard(blackboard);
+    ui->throttle->setValue(0);
+
     auto controller = new Controller(this);
     controller->setBlackboard(blackboard);
     controller->setSpeedo(ui->speedo);

@@ -92,9 +92,24 @@
      </layout>
     </item>
     <item row="0" column="1" rowspan="2">
-     <widget class="Throttle" name="verticalSlider">
+     <widget class="Throttle" name="throttle">
+      <property name="toolTip">
+       <string> Throttle</string>
+      </property>
+      <property name="minimum">
+       <number>-100</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
+      </property>
+      <property name="tickPosition">
+       <enum>QSlider::TicksBothSides</enum>
+      </property>
+      <property name="tickInterval">
+       <number>10</number>
       </property>
      </widget>
     </item>
@@ -113,7 +128,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

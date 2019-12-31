@@ -13,7 +13,7 @@ Throttle::Throttle(Qt::Orientation orientation, QWidget *parent)
 {
     setPageStep(10);
     setRange(-100, 100);
-    connect(this, &QSlider::valueChanged, [this](int value) {
+    connect(this, &QAbstractSlider::valueChanged, [this](int value) {
         postUpdate({"throttle", value});
     });
 
