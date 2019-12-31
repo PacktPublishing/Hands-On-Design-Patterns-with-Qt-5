@@ -16,7 +16,7 @@ Odometer::~Odometer()
 
 void Odometer::setBlackboard(Blackboard *a_blackboard)
 {
-    KnowledgeSource::setBlackboard(a_blackboard);  // (Decorator Pattern)
+    KnowledgeSource::setBlackboard(a_blackboard);
 }
 
 void Odometer::act(Topic a_topic)
