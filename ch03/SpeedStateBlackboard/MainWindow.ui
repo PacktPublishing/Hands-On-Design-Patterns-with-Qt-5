@@ -14,15 +14,8 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="2,1">
-    <item>
-     <widget class="Speedometer" name="speedo">
-      <property name="digitCount">
-       <number>7</number>
-      </property>
-     </widget>
-    </item>
-    <item>
+   <layout class="QGridLayout" name="gridLayout" rowstretch="2,1">
+    <item row="1" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,2,1">
       <item>
        <widget class="FuelUsageDisp" name="fuelUsage" native="true">
@@ -98,6 +91,20 @@
       </item>
      </layout>
     </item>
+    <item row="0" column="1" rowspan="2">
+     <widget class="Throttle" name="verticalSlider">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="Speedometer" name="speedo">
+      <property name="digitCount">
+       <number>7</number>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -106,7 +113,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -128,6 +135,11 @@
    <extends>QWidget</extends>
    <header>FuelUsageDisp.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Throttle</class>
+   <extends>QSlider</extends>
+   <header>Throttle.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

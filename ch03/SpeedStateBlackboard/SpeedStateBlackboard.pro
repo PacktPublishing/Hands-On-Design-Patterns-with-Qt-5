@@ -1,5 +1,4 @@
 QT       += core gui widgets scxml
-
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -21,6 +20,7 @@ SOURCES += \
     KnowledgeSource.cpp \
     Odometer.cpp \
     Speedometer.cpp \
+    Throttle.cpp \
     Vehicle.cpp \
     main.cpp \
     MainWindow.cpp
@@ -34,6 +34,7 @@ HEADERS += \
     MainWindow.h \
     Odometer.h \
     Speedometer.h \
+    Throttle.h \
     Topic.h \
     Vehicle.h
 

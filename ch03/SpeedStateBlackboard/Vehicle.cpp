@@ -2,6 +2,7 @@
 
 #include <QTimer>
 #include <QDateTime>
+#include "Blackboard.h"
 
 Vehicle::Vehicle(QObject *parent)
     : QObject(parent),
@@ -47,9 +48,11 @@ void Vehicle::postUpdate(Topic a_topic)
 void Vehicle::adjustSpeed()
 {
     m_distance += m_speed;  // dist = sum(speed/time)
-    m_fuelUsage += 0.23;
 
-    m_accel += ((qrand() % 401) - 198) / 200.0;
+    auto throttle = m_blackboard->inspect("throttle").data.toDouble() / 100.0;
+    m_fuelUsage += 0.01 + ((throttle > 0) ? throttle : 0.0);
+
+    m_accel += throttle;
     m_speed += m_accel;
     if (m_speed < 0.0)
     {
