@@ -8,6 +8,7 @@ class KnowledgeSourceFactory
 {
 public:
     KnowledgeSourceFactory();
+    virtual ~KnowledgeSourceFactory() = default;
 
     virtual KnowledgeSource *createProduct(Blackboard *a_blackboard) = 0;
 };
