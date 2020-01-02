@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="FuelDisplayStateMachine" qt:editorversion="4.11.0">
+    <state id="PerDistance">
+        <qt:editorinfo stateColor="#91e3d8" scenegeometry="347.67;149.87;219.21;99.87;173.90;100" geometry="347.67;149.87;-128.46;-50;173.90;100"/>
+        <transition type="external" event="Next" target="PerSecond">
+            <qt:editorinfo localGeometry="153.65;-40.78"/>
+        </transition>
+    </state>
+    <state id="PerSecond">
+        <qt:editorinfo stateColor="#91e3d8" scenegeometry="594.39;149.87;534.39;99.87;120;100" geometry="594.39;149.87;-60;-50;120;100"/>
+        <transition type="external" event="Next" target="Total">
+            <qt:editorinfo movePoint="17.32;11.22"/>
+        </transition>
+    </state>
+    <state id="Total">
+        <qt:editorinfo stateColor="#ffd393" scenegeometry="594.39;287.51;534.39;237.51;120;100" geometry="594.39;287.51;-60;-50;120;100"/>
+        <transition type="external" event="Next" target="DistPerFuel">
+            <qt:editorinfo movePoint="-7.14;16.31"/>
+        </transition>
+    </state>
+    <state id="DistPerFuel">
+        <qt:editorinfo stateColor="#ffd393" scenegeometry="306.16;287.51;246.16;237.51;120;100" geometry="306.16;287.51;-60;-50;120;100"/>
+        <transition type="external" event="Next" target="PerDistance">
+            <qt:editorinfo movePoint="49;11"/>
+        </transition>
+    </state>
+</scxml>
