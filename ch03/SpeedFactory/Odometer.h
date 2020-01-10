@@ -11,10 +11,13 @@ public:
     ~Odometer();
 
     void setBlackboard(Blackboard *a_blackboard) final;
-    void act(Topic a_topic) final;
+    // void act(Topic a_topic) final;
 
 protected:
     // void postUpdate(Topic a_topic) final;
+
+private slots:
+    void doTimedUpdate();
 };
 
 #endif // ODOMETER_H

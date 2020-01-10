@@ -1,5 +1,6 @@
 #include "Odometer.h"
 #include "Blackboard.h"
+#include <QTimer>
 
 Odometer::Odometer(QWidget *parent)
     : QLCDNumber(parent),
@@ -17,14 +18,13 @@ Odometer::~Odometer()
 void Odometer::setBlackboard(Blackboard *a_blackboard)
 {
     KnowledgeSource::setBlackboard(a_blackboard);
+    QTimer::singleShot(250, this, &Odometer::doTimedUpdate);
 }
 
-void Odometer::act(Topic a_topic)
+void Odometer::doTimedUpdate()
 {
-    auto name = a_topic.name;
-    auto val = a_topic.data.value<double>();
-    if (name == "distance")
-    {
-        display(QString::number(val, 'f', 1));
-    }
+    auto val = m_blackboard->inspect("speed").data.toDouble();
+    display(QString::number(val, 'f', 1));
+
+    QTimer::singleShot(250, this, &Odometer::doTimedUpdate);
 }
