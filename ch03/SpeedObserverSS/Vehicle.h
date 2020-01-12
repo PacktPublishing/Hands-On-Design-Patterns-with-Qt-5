@@ -14,13 +14,10 @@ class Vehicle : public QObject
 public:
     explicit Vehicle(QObject *parent = nullptr);
 
-    void registerObserver(Observer *observer);
-    void unregiserObserver(Observer *observer);
-
     void notify();
 
 signals:
-    void speedNotification(QVariant speed);
+    void notification(QVariant speed);
 
 public slots:
     // Nothing for now

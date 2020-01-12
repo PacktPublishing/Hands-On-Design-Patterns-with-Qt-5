@@ -3,19 +3,19 @@
 
 #include <QTimer>
 
-Vehicle::Vehicle(QObject *parent)
-    : QObject(parent),
-      m_speed(0.0),
+Vehicle::Vehicle()
+    : m_speed(0.0),
       m_accel(0.5)
 {
+    // setup a QTimer to adjustSpeed and send out notifications.
     m_notificationTimer = new QTimer;
     m_notificationTimer->setInterval(1000);
     m_notificationTimer->setSingleShot(false);
-    connect(m_notificationTimer, &QTimer::timeout,
-            [this] {
-                adjustSpeed();
-                notify();
-            });
+    QTimer::connect(m_notificationTimer, &QTimer::timeout,
+                    [this] {
+                        adjustSpeed();
+                        notify();
+                    });
     m_notificationTimer->start();
 }
 

@@ -10,7 +10,7 @@ public:
     Odometer(QWidget* parent = nullptr);
     ~Odometer();
 
-    void setBroker(Broker *broker) override;
+    void setBroker(Broker *broker) final;
     void update(Topic a_topic) final;
 };
 

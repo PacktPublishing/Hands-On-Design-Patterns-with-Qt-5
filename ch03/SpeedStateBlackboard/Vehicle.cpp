@@ -4,26 +4,26 @@
 #include <QDateTime>
 #include "Blackboard.h"
 
-Vehicle::Vehicle(QObject *parent)
-    : QObject(parent),
-      m_speed(0.0),
+Vehicle::Vehicle()
+    : m_speed(0.0),
       m_accel(0.5),
       m_distance(0.0),
       m_heading(0.0),
       m_fuelUsage(0.0)
 {
+    // setup a QTimer to periodically adjustSpeed and postUpdate()
     m_notificationTimer = new QTimer;
     m_notificationTimer->setInterval(1000);
     m_notificationTimer->setSingleShot(false);
-    connect(m_notificationTimer, &QTimer::timeout,
-            [this] {
-                adjustSpeed();
-                postUpdate(Topic{"speed",    m_speed});
-                postUpdate(Topic{"accel",    m_accel});
-                postUpdate(Topic{"distance", m_distance});
-                postUpdate(Topic{"heading",  m_heading});
-                postUpdate(Topic{"fuelUsage", m_fuelUsage});
-            });
+    QTimer::connect(m_notificationTimer, &QTimer::timeout,
+                    [this] {
+                        adjustSpeed();
+                        postUpdate(Topic{"speed",    m_speed});
+                        postUpdate(Topic{"accel",    m_accel});
+                        postUpdate(Topic{"distance", m_distance});
+                        postUpdate(Topic{"heading",  m_heading});
+                        postUpdate(Topic{"fuelUsage", m_fuelUsage});
+                    });
     m_notificationTimer->start();
 
     qsrand(QDateTime::currentSecsSinceEpoch());

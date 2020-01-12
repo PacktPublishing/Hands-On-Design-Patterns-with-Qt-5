@@ -2,27 +2,26 @@
 
 #include <QTimer>
 
-Vehicle::Vehicle(QObject *parent)
-    : QObject(parent),
-      m_speed(0.0),
+Vehicle::Vehicle()
+    : m_speed(0.0),
       m_accel(0.5),
       m_distance(0.0),
       m_heading(0.0)
 {
+    // set up time to adjustSpeed periodically
     m_notificationTimer = new QTimer;
     m_notificationTimer->setInterval(1000);
     m_notificationTimer->setSingleShot(false);
-    connect(m_notificationTimer, &QTimer::timeout,
-            [this] {
-                adjustSpeed();
-                notify(Topic{"speed",    m_speed});
-                notify(Topic{"accel",    m_accel});
-                notify(Topic{"distance", m_distance});
-                notify(Topic{"heading",  m_heading});
-            });
+    QTimer::connect(m_notificationTimer, &QTimer::timeout,
+                    [this] {
+                        adjustSpeed();
+                        notify(Topic{"speed",    m_speed});
+                        notify(Topic{"accel",    m_accel});
+                        notify(Topic{"distance", m_distance});
+                        notify(Topic{"heading",  m_heading});
+                    });
     m_notificationTimer->start();
 }
-
 
 void Vehicle::adjustSpeed()
 {

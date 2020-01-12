@@ -1,29 +1,20 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
-#include <QObject>
 #include <QList>
 
 class QTimer;
 class Observer;
 
-class Vehicle : public QObject
+class Vehicle
 {
-    Q_OBJECT
-
 public:
-    explicit Vehicle(QObject *parent = nullptr);
+    explicit Vehicle();
 
     void registerObserver(Observer *observer);
     void unregiserObserver(Observer *observer);
 
     void notify();
-
-signals:
-    // Nothing for now
-
-public slots:
-    // Nothing for now
 
 private:
     QList<Observer *>   m_observers;

@@ -10,7 +10,7 @@ public:
     Speedometer(QWidget* parent = nullptr);
     ~Speedometer();
 
-    void setBroker(Broker *broker) override;
+    void setBroker(Broker *broker) final;
     void update(Topic a_topic) final;
 };
 
