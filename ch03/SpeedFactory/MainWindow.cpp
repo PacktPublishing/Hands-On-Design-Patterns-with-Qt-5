@@ -40,9 +40,12 @@ MainWindow::MainWindow(QWidget *parent)
     // use factories to create the DashWidgets
     ui->dashWidgetFrame->setLayout(new QHBoxLayout);
     auto layout = ui->dashWidgetFrame->layout();
-    layout->addWidget(DashWidgetFactory<HeadingIndicator>::createProduct(blackboard, this));
-    layout->addWidget(DashWidgetFactory<HeadlightSwitch>::createProduct(blackboard, this));
-    layout->addWidget(DashWidgetFactory<HighBeamIndicator>::createProduct(blackboard, this));
+    layout->addWidget(DashWidgetFactory<HeadingIndicator>::
+                      createProduct(blackboard, this));
+    layout->addWidget(DashWidgetFactory<HeadlightSwitch>::
+                      createProduct(blackboard, this));
+    layout->addWidget(DashWidgetFactory<HighBeamIndicator>::
+                      createProduct(blackboard, this));
 }
 
 MainWindow::~MainWindow()
