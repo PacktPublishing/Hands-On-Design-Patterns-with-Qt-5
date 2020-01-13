@@ -1,10 +1,13 @@
 #include "MainWindow.h"
+
 #include "ui_MainWindow.h"
 #include "Blackboard.h"
-#include "Vehicle.h"
-#include "FuelUsageCalc.h"
 #include "FuelUsageDisp.h"
 #include "FuelDisplayStateMachine.h"
+
+#include "KnowledgeSourceFactory.h"
+#include "FuelUsageCalc.h"
+#include "Vehicle.h"
 
 #include "DashWidgetFactory.h"
 #include "HeadingIndicator.h"
@@ -20,22 +23,21 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    auto blackboard = new Blackboard;           // (1) create a Blackboard
+    auto blackboard = new Blackboard;
 
-    ui->speedo->setBlackboard(blackboard);      // (2) tell speedo about Blackboard
-    ui->odo->setBlackboard(blackboard);         // (3) tell odo about Blackboard
-
-    auto vehicle = new Vehicle;
-    vehicle->setBlackboard(blackboard);         // (4) tell Blackboard about vehicle
-
-    auto fcalc = new FuelUsageCalc;
-    fcalc->setBlackboard(blackboard);
+    // setup the fixed ui components
+    ui->speedo->setBlackboard(blackboard);
+    ui->odo->setBlackboard(blackboard);
 
     ui->fuelUsage->setBlackboard(blackboard);
     ui->fuelUsage->setModeSM(new FuelDisplayStateMachine(this));
 
     ui->throttle->setBlackboard(blackboard);
     ui->throttle->setValue(0);
+
+    // Use KnowledegeSourceFactories to create pure Knowledge Sources
+    KnowledgeSourceFactory<Vehicle>::createProduct(blackboard);
+    KnowledgeSourceFactory<FuelUsageCalc>::createProduct(blackboard);
 
     // use factories to create the DashWidgets
     ui->dashWidgetFrame->setLayout(new QHBoxLayout);

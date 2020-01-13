@@ -4,13 +4,18 @@
 class KnowledgeSource;
 class Blackboard;
 
+template <class T>
 class KnowledgeSourceFactory
 {
 public:
-    KnowledgeSourceFactory();
-    virtual ~KnowledgeSourceFactory() = default;
+//    KnowledgeSourceFactory();
+//    virtual ~KnowledgeSourceFactory() = default;
 
-    virtual KnowledgeSource *createProduct(Blackboard *a_blackboard) = 0;
+    static KnowledgeSource *createProduct(Blackboard *a_blackboard) {
+        auto obj = new T;
+        obj->setBlackboard(a_blackboard);
+        return obj;
+    }
 };
 
 #endif // KNOWLEDGESOURCEFACTORY_H

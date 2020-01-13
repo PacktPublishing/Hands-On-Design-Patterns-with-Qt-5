@@ -21,7 +21,6 @@ SOURCES += \
     HeadlightSwitch.cpp \
     HighBeamIndicator.cpp \
     KnowledgeSource.cpp \
-    KnowledgeSourceFactory.cpp \
     Odometer.cpp \
     Speedometer.cpp \
     Throttle.cpp \
