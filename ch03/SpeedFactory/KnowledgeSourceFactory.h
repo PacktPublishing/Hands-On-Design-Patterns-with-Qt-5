@@ -8,9 +8,6 @@ template <class T>
 class KnowledgeSourceFactory
 {
 public:
-//    KnowledgeSourceFactory();
-//    virtual ~KnowledgeSourceFactory() = default;
-
     static KnowledgeSource *createProduct(Blackboard *a_blackboard) {
         auto obj = new T;
         obj->setBlackboard(a_blackboard);
