@@ -2,7 +2,6 @@
 #include "ui_MainWindow.h"
 #include "Blackboard.h"
 #include "Vehicle.h"
-#include "Controller.h"
 #include "FuelUsageCalc.h"
 #include "FuelUsageDisp.h"
 #include "FuelDisplayStateMachine.h"

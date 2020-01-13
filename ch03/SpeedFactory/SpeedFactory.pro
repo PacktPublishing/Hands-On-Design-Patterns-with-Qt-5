@@ -14,7 +14,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Blackboard.cpp \
-    Controller.cpp \
     DashWidget.cpp \
     FuelUsageCalc.cpp \
     FuelUsageDisp.cpp \
@@ -32,7 +31,6 @@ SOURCES += \
 
 HEADERS += \
     Blackboard.h \
-    Controller.h \
     DashWidget.h \
     DashWidgetFactory.h \
     FuelUsageCalc.h \
