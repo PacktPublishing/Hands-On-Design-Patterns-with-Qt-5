@@ -13,7 +13,6 @@ public:
     void setBlackboard(Blackboard *a_blackboard) final;
     // void act(Topic a_topic) final;
 
-
 protected:
     // void postUpdate(Topic a_topic) final;
 

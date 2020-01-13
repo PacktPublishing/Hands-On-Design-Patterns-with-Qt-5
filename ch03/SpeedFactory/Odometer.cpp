@@ -23,7 +23,7 @@ void Odometer::setBlackboard(Blackboard *a_blackboard)
 
 void Odometer::doTimedUpdate()
 {
-    auto val = m_blackboard->inspect("speed").data.toDouble();
+    auto val = m_blackboard->inspect("distance").data.toDouble();
     display(QString::number(val, 'f', 1));
 
     QTimer::singleShot(250, this, &Odometer::doTimedUpdate);

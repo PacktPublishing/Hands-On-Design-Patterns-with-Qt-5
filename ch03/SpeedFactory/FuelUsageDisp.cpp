@@ -1,7 +1,10 @@
 #include "FuelUsageDisp.h"
 #include "ui_FuelUsageDisp.h"
 
+#include "Blackboard.h"
+
 #include <QScxmlStateMachine>
+#include <QTimer>
 
 FuelUsageDisp::FuelUsageDisp(QWidget *parent)
     : QWidget(parent),
@@ -26,29 +29,19 @@ FuelUsageDisp::FuelUsageDisp(QWidget *parent)
 void FuelUsageDisp::setBlackboard(Blackboard *a_blackboard)
 {
     KnowledgeSource::setBlackboard(a_blackboard);
+    QTimer::singleShot(1000, [this] () { doTimedUpdate(); });
 }
 
-void FuelUsageDisp::act(Topic a_topic)
+void FuelUsageDisp::doTimedUpdate()
 {
-    auto val = a_topic.data.toDouble();
-    auto name = a_topic.name;
+    m_perSec  = m_blackboard->inspect("fuelPerSec").data.toDouble();
+    m_perDist = m_blackboard->inspect("fuelPerDist").data.toDouble();
+    m_total   = m_blackboard->inspect("fuelUsage").data.toDouble();
+    m_perFuel = m_blackboard->inspect("distPerFuel").data.toDouble();
 
-    QString text = "-999.99";
-    text = QString::number(val, 'f', 4);
-
-    if (name == "fuelPerSec") {
-        m_perSec = val;
-    }
-    else if (name == "fuelPerDist") {
-        m_perDist = val;
-    }
-    else if (name == "fuelUsage") {
-        m_total = val;
-    }
-    else if (name == "distPerFuel") {
-        m_perFuel = val;
-    }
     updateMode();   // for re-display
+
+    QTimer::singleShot(1000, [this] () { doTimedUpdate(); });
 }
 
 void FuelUsageDisp::nextMode()
@@ -97,8 +90,14 @@ QScxmlStateMachine *FuelUsageDisp::modeSM() const
 void FuelUsageDisp::setModeSM(QScxmlStateMachine *modeSM)
 {
     m_modeSM = modeSM;
+
+    // Initialize the state machine
     m_modeSM->init();
+
+    // When the state machine changes state, update the display (updateMode)
     connect(m_modeSM, &QScxmlStateMachine::reachedStableState,
             this, &FuelUsageDisp::updateMode);
+
+    // start the state machine
     m_modeSM->start();
 }

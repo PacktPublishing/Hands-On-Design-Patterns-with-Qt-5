@@ -19,8 +19,6 @@ public:
     ~FuelUsageDisp() = default;
 
     void setBlackboard(Blackboard *a_blackboard) final;
-    void act(Topic a_topic) final;
-
 
     QScxmlStateMachine *modeSM() const;
     void setModeSM(QScxmlStateMachine *modeSM);
@@ -42,6 +40,8 @@ private:
     double  m_perDist;
     double  m_total;
     double  m_perFuel;
+
+    void doTimedUpdate();
 };
 
 #endif // MILEAGEDISPLAY_H

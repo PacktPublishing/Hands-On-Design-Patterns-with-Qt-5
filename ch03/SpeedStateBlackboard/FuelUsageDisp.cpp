@@ -33,9 +33,6 @@ void FuelUsageDisp::act(Topic a_topic)
     auto val = a_topic.data.toDouble();
     auto name = a_topic.name;
 
-    QString text = "-999.99";
-    text = QString::number(val, 'f', 4);
-
     if (name == "fuelPerSec") {
         m_perSec = val;
     }

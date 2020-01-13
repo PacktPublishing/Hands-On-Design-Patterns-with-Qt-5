@@ -4,34 +4,31 @@
 #include <QLabel>
 #include <QPainter>
 #include <QHBoxLayout>
+#include <QScxmlStateMachine>
+#include <QTimer>
 
 HighBeamIndicator::HighBeamIndicator(QWidget *parent)
     : DashWidget(parent)
 {    
     this->setLayout(new QHBoxLayout);
     m_label = new QLabel(this);
+    m_label->setAlignment(Qt::AlignCenter);
     this->layout()->addWidget(m_label);
 }
 
-void HighBeamIndicator::act(Topic a_topic)
+void HighBeamIndicator::setBlackboard(Blackboard *a_blackboard)
 {
-    if (a_topic.name == "highbeam")
-    {
-        QPixmap pix;
-        QPainter painter(&pix);
-        auto isOnP = a_topic.data.toBool();
-        if (isOnP)
-        {
-            painter.drawText(32, 32, "On");
-            painter.drawEllipse(0, 0, 64, 64);
-        }
-        else
-        {
-            painter.drawText(32, 32, "Off");
-            painter.drawEllipse(0, 0, 64, 64);
-        }
-        painter.end();
-        m_label->setPixmap(pix);
-
-    }
+    m_blackboard = a_blackboard;
+    QTimer::singleShot(50, this, &HighBeamIndicator::handleHeadlightState);
 }
+
+void HighBeamIndicator::handleHeadlightState()
+{
+    auto topic = m_blackboard->inspect("headlightState");
+    auto states = topic.data.toStringList();
+
+    m_label->setText(states.join("\n"));
+
+    QTimer::singleShot(50, this, &HighBeamIndicator::handleHeadlightState);
+}
+

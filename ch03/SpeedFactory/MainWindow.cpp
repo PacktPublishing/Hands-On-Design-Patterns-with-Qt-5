@@ -7,6 +7,14 @@
 #include "FuelUsageDisp.h"
 #include "FuelDisplayStateMachine.h"
 
+#include "DashWidgetFactory.h"
+#include "HeadingIndicator.h"
+#include "HighBeamIndicator.h"
+#include "HeadlightSwitch.h"
+
+#include <QHBoxLayout>
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -30,12 +38,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->throttle->setBlackboard(blackboard);
     ui->throttle->setValue(0);
 
-    auto controller = new Controller(this);
-    controller->setBlackboard(blackboard);
-    controller->setSpeedo(ui->speedo);
-    controller->setOdo(ui->odo);
-    controller->setFuelUsageCalc(fcalc);
-    controller->setFuelUsageDisp(ui->fuelUsage);
+    // use factories to create the DashWidgets
+    ui->dashWidgetFrame->setLayout(new QHBoxLayout);
+    auto layout = ui->dashWidgetFrame->layout();
+    layout->addWidget(DashWidgetFactory<HeadingIndicator>::createProduct(blackboard, this));
+    layout->addWidget(DashWidgetFactory<HeadlightSwitch>::createProduct(blackboard, this));
+    layout->addWidget(DashWidgetFactory<HighBeamIndicator>::createProduct(blackboard, this));
 }
 
 MainWindow::~MainWindow()

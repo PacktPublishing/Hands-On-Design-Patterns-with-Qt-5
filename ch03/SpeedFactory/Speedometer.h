@@ -11,10 +11,13 @@ public:
     ~Speedometer();
 
     void setBlackboard(Blackboard *a_blackboard) override;
-    void act(Topic a_topic) override;
+    // void act(Topic a_topic) override;
 
 protected:
     // void postUpdate(Topic a_topic) final;
+
+private slots:
+    void doTimedUpdate();
 };
 
 #endif // SPEEDOMETER_H

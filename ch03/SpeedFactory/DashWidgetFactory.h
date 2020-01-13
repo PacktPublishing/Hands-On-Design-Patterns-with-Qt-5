@@ -5,13 +5,18 @@ class DashWidget;
 class Blackboard;
 class QWidget;
 
+template <class T>
 class DashWidgetFactory
 {
 public:
-    DashWidgetFactory();
-    virtual ~DashWidgetFactory() = default;
+//    DashWidgetFactory();
+//    ~DashWidgetFactory() = default;
 
-    virtual DashWidget *createProduct(Blackboard *a_blackboard, QWidget *parent = nullptr) = 0;
+    static DashWidget *createProduct(Blackboard *a_blackboard, QWidget *parent = nullptr) {
+        auto obj = new T(parent);
+        obj->setBlackboard(a_blackboard);
+        return obj;
+    }
 };
 
 #endif // DASHWIDGETFACTORY_H

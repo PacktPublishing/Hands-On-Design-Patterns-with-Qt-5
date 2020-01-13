@@ -13,7 +13,7 @@ Vehicle::Vehicle(QObject *parent)
       m_fuelUsage(0.0)
 {
     m_notificationTimer = new QTimer;
-    m_notificationTimer->setInterval(1000);
+    m_notificationTimer->setInterval(10);
     m_notificationTimer->setSingleShot(false);
     connect(m_notificationTimer, &QTimer::timeout,
             [this] {
@@ -49,7 +49,7 @@ void Vehicle::adjustSpeed()
 {
     m_distance += m_speed;  // dist = sum(speed/time)
 
-    auto throttle = m_blackboard->inspect("throttle").data.toDouble() / 10.0;
+    auto throttle = m_blackboard->inspect("throttle").data.toDouble() / 1000.0;
     m_fuelUsage += 0.01 + ((throttle > 0) ? throttle : 0.0);
 
     m_accel = throttle;

@@ -16,14 +16,13 @@ SOURCES += \
     Blackboard.cpp \
     Controller.cpp \
     DashWidget.cpp \
-    DashWidgetFactory.cpp \
     FuelUsageCalc.cpp \
     FuelUsageDisp.cpp \
     HeadingIndicator.cpp \
+    HeadlightSwitch.cpp \
     HighBeamIndicator.cpp \
     KnowledgeSource.cpp \
     KnowledgeSourceFactory.cpp \
-    MapDisplay.cpp \
     Odometer.cpp \
     Speedometer.cpp \
     Throttle.cpp \
@@ -39,11 +38,12 @@ HEADERS += \
     FuelUsageCalc.h \
     FuelUsageDisp.h \
     HeadingIndicator.h \
+    HeadingIndicatorFactory.h \
+    HeadlightSwitch.h \
     HighBeamIndicator.h \
     KnowledgeSource.h \
     KnowledgeSourceFactory.h \
     MainWindow.h \
-    MapDisplay.h \
     Odometer.h \
     Speedometer.h \
     Throttle.h \
@@ -61,4 +61,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 STATECHARTS += \
     CruiseControlStateMachine.scxml \
-    FuelDisplayStateMachine.scxml
+    FuelDisplayStateMachine.scxml \
+    HeadlightStateMachine.scxml
