@@ -65,3 +65,7 @@ STATECHARTS += \
     CruiseControlStateMachine.scxml \
     FuelDisplayStateMachine.scxml \
     HeadlightStateMachine.scxml
+
+DISTFILES += \
+    SpeedFactory.conf \
+    windows.reg

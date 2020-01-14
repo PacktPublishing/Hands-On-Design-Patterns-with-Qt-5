@@ -173,15 +173,26 @@ void WeatherFetcher::stop()
 
 void WeatherFetcher::doUpdate()
 {
-    auto posLat = m_blackboard->inspect("GPSLat").data.toDouble();
-    auto posLon = m_blackboard->inspect("GPSLon").data.toDouble();
+    int updateTime = m_updateSecs * 1000;
 
-    QString query = QStringLiteral("http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=%4")
-                        .arg(posLat).arg(posLon).arg(m_key, m_units);
-    //-- qDebug() << query;
+    auto qvarLat = m_blackboard->inspect("GPSLat").data;
+    auto qvarLon = m_blackboard->inspect("GPSLon").data;
 
-    m_netMan->get(QNetworkRequest(QUrl(query)));
+    if (qvarLat.isValid() && qvarLon.isValid()) {
+        auto posLat = qvarLat.toDouble();
+        auto posLon = qvarLon.toDouble();
 
-    m_lastUpdate = QDateTime::currentDateTime();
-    m_updateTimer->start(m_updateSecs * 1000);
+        QString query = QStringLiteral("http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=%4")
+                .arg(posLat).arg(posLon).arg(m_key, m_units);
+        // qDebug() << query;
+
+        m_netMan->get(QNetworkRequest(QUrl(query)));
+
+        m_lastUpdate = QDateTime::currentDateTime();
+    } else {
+        updateTime = 2000;
+        qWarning() << "Invalid Position, waiting";
+    }
+
+    m_updateTimer->start(updateTime);
 }

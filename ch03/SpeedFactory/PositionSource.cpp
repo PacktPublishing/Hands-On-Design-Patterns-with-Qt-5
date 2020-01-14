@@ -9,26 +9,36 @@ PositionSource::PositionSource(QObject *parent)
     : QObject(parent),
       KnowledgeSource()
 {
-    m_posSource = QGeoPositionInfoSource::createDefaultSource(this);
+    // for windows 10, see if we have a position source, else fallback
+    auto posSources = QGeoPositionInfoSource::availableSources();
+    qInfo() << "This system has the following QGeoPositionInfoSources:" << posSources;
+
+    if (posSources.contains("winrt")) {
+        m_posSource = QGeoPositionInfoSource::createSource("winrt", this);
+    } else {
+        m_posSource = QGeoPositionInfoSource::createDefaultSource(this);
+    }
+
     if (m_posSource) {
         connect(m_posSource, &QGeoPositionInfoSource::positionUpdated,
                 this, &PositionSource::handlePositionUpdate);
-
-        // Start Somewhere: 43.1566° N, 77.6088° W
-        postUpdate({"GPSLat",    -77.6088});
-        postUpdate({"GPSLon",    43.1566});
-        postUpdate({"GPSDir",    123.45});
-        postUpdate({"GPSSpeed",  0.123});
-        postUpdate({"GPSVSpeed", 0.0});
-
+        m_posSource->setUpdateInterval(10 * 1000);
+        m_posSource->startUpdates();
     } else {
-        qWarning() << "!! No Position Source found. Using default. !!";
+        qWarning() << "!! No Position Source found. Using default position. !!";
     }
 }
 
 void PositionSource::setBlackboard(Blackboard *a_blackboard)
 {
     KnowledgeSource::setBlackboard(a_blackboard);
+
+    // Start Somewhere: 43.1566° N, 77.6088° W
+    postUpdate({"GPSLon",    -77.6088});
+    postUpdate({"GPSLat",    43.1566});
+    postUpdate({"GPSDir",    123.45});
+    postUpdate({"GPSSpeed",  0.123});
+    postUpdate({"GPSVSpeed", 0.0});
 }
 
 void PositionSource::handlePositionUpdate(const QGeoPositionInfo &update)

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" name="HeadlightStateMachine" qt:editorversion="4.11.0" xmlns:qt="http://www.qt.io/2015/02/scxml-ext">
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="HeadlightStateMachine" qt:editorversion="4.11.0">
     <state id="Off">
-        <qt:editorinfo geometry="-50.87;306.43;-60;-50;120;100" scenegeometry="-50.87;306.43;-110.87;256.43;120;100" stateColor="#c6fffc"/>
+        <qt:editorinfo scenegeometry="-50.87;306.43;-110.87;256.43;120;100" geometry="-50.87;306.43;-60;-50;120;100" stateColor="#c6fffc"/>
         <transition type="external" event="next" target="Parking">
             <qt:editorinfo movePoint="-3;12"/>
         </transition>
     </state>
     <state id="Parking">
-        <qt:editorinfo geometry="162.33;306.43;-60;-50;120;100" scenegeometry="162.33;306.43;102.33;256.43;120;100" stateColor="#c6fffc"/>
+        <qt:editorinfo scenegeometry="162.33;306.43;102.33;256.43;120;100" geometry="162.33;306.43;-60;-50;120;100" stateColor="#c6fffc"/>
         <transition type="external" event="next" target="On">
             <qt:editorinfo movePoint="0;11" endTargetFactors="79.70;57.19"/>
         </transition>
         <transition type="external" event="next" target="Off">
-            <qt:editorinfo localGeometry="-112.33;-31.43" movePoint="7;-21"/>
+            <qt:editorinfo localGeometry="-110.24;-28.17" movePoint="7;-21"/>
         </transition>
     </state>
     <state id="On">
-        <qt:editorinfo geometry="395.61;167.66;-79.61;-87.79;283;393.13" scenegeometry="395.61;167.66;316;79.87;283;393.13" stateColor="#c6fffc"/>
+        <qt:editorinfo scenegeometry="413.26;279.81;333.65;204.57;447.92;171.86" geometry="413.26;279.81;-79.61;-75.24;447.92;171.86" stateColor="#c6fffc"/>
+        <transition type="external" event="next" target="Parking">
+            <qt:editorinfo localGeometry="-312.78;-1.63" movePoint="1.21;-15.90"/>
+        </transition>
         <state id="LowBeams">
-            <qt:editorinfo geometry="27.39;29.34;-60;-50;169;100" scenegeometry="647;195;587;145;169;100" stateColor="#f6eaff"/>
+            <qt:editorinfo scenegeometry="423.01;306.43;363.01;256.43;147.75;100" geometry="9.75;26.62;-60;-50;147.75;100" stateColor="#f6eaff"/>
             <transition type="external" event="toggleBeams" target="HighBeams">
-                <qt:editorinfo localGeometry="-45.62;97" movePoint="-45;-3"/>
+                <qt:editorinfo localGeometry="139.40;31.02" movePoint="21.18;6.93"/>
             </transition>
         </state>
         <state id="HighBeams">
-            <qt:editorinfo geometry="53.39;230.34;-60;-50;120;100" scenegeometry="673;396;613;346;120;100" stateColor="#f6eaff"/>
+            <qt:editorinfo scenegeometry="701.57;306.43;641.57;256.43;120;100" geometry="288.31;26.62;-60;-50;120;100" stateColor="#f6eaff"/>
             <transition type="external" event="toggleBeams" target="LowBeams">
-                <qt:editorinfo localGeometry="46.55;-105" movePoint="74;3"/>
+                <qt:editorinfo localGeometry="-130.25;-27.39" movePoint="-6.51;-33.40"/>
             </transition>
         </state>
-        <transition type="external" event="next" target="Parking">
-            <qt:editorinfo localGeometry="-205.50;-4.02" movePoint="-1;-17"/>
-        </transition>
     </state>
 </scxml>
