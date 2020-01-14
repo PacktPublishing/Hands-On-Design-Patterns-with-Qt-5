@@ -1,4 +1,4 @@
-QT       += core gui widgets scxml
+QT       += core gui widgets scxml positioning
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -22,9 +22,12 @@ SOURCES += \
     HighBeamIndicator.cpp \
     KnowledgeSource.cpp \
     Odometer.cpp \
+    PositionSource.cpp \
     Speedometer.cpp \
     Throttle.cpp \
     Vehicle.cpp \
+    WeatherDisplay.cpp \
+    WeatherFetcher.cpp \
     main.cpp \
     MainWindow.cpp
 
@@ -35,17 +38,19 @@ HEADERS += \
     FuelUsageCalc.h \
     FuelUsageDisp.h \
     HeadingIndicator.h \
-    HeadingIndicatorFactory.h \
     HeadlightSwitch.h \
     HighBeamIndicator.h \
     KnowledgeSource.h \
     KnowledgeSourceFactory.h \
     MainWindow.h \
     Odometer.h \
+    PositionSource.h \
     Speedometer.h \
     Throttle.h \
     Topic.h \
-    Vehicle.h
+    Vehicle.h \
+    WeatherDisplay.h \
+    WeatherFetcher.h
 
 FORMS += \
     FuelUsageDisp.ui \

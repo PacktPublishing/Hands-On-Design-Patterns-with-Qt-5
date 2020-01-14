@@ -8,11 +8,14 @@
 #include "KnowledgeSourceFactory.h"
 #include "FuelUsageCalc.h"
 #include "Vehicle.h"
+#include "PositionSource.h"
+#include "WeatherFetcher.h"
 
 #include "DashWidgetFactory.h"
 #include "HeadingIndicator.h"
 #include "HighBeamIndicator.h"
 #include "HeadlightSwitch.h"
+#include "WeatherDisplay.h"
 
 #include <QHBoxLayout>
 
@@ -38,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Use KnowledegeSourceFactories to create pure Knowledge Sources
     KnowledgeSourceFactory<Vehicle>::createProduct(blackboard);
     KnowledgeSourceFactory<FuelUsageCalc>::createProduct(blackboard);
+    KnowledgeSourceFactory<PositionSource>::createProduct(blackboard);
+    KnowledgeSourceFactory<WeatherFetcher>::createProduct(blackboard);
 
     // use factories to create the DashWidgets
     ui->dashWidgetFrame->setLayout(new QHBoxLayout);
@@ -47,6 +52,8 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(DashWidgetFactory<HeadlightSwitch>::
                       createProduct(blackboard, this));
     layout->addWidget(DashWidgetFactory<HighBeamIndicator>::
+                      createProduct(blackboard, this));
+    layout->addWidget(DashWidgetFactory<WeatherDisplay>::
                       createProduct(blackboard, this));
 }
 
