@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->odo->setBroker(broker);         // (3) tell odo about broker
 
     auto vehicle = new Vehicle;
-    vehicle->setBroker(broker);         // (4) tell broker about vehicle
+    vehicle->setBroker(broker);         // (4) tell vehicle about broker
 }
 
 MainWindow::~MainWindow()
