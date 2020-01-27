@@ -19,7 +19,7 @@ Topic Blackboard::inspect(QString name)
 
 void Blackboard::update(const Topic &a_topic)
 {
-    qInfo() << a_topic.name << ":" << a_topic.data;
+    //-- qInfo() << a_topic.name << ":" << a_topic.data;
 
     if (m_items.contains(a_topic.name))
     {
