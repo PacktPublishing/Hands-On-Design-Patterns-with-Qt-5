@@ -1,3 +1,17 @@
-<?xml version="1.0" ?>
-<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" name="WeatherFetchigStateMachine">
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" name="WeatherFetchigStateMachine" qt:editorversion="4.11.1" xmlns:qt="http://www.qt.io/2015/02/scxml-ext">
+    <state id="Wait">
+        <qt:editorinfo scenegeometry="70.78;106.16;10.78;56.16;120;100" geometry="70.78;106.16;-60;-50;120;100"/>
+        <transition type="external" target="RequestSent" event="MakeRequest"/>
+    </state>
+    <state id="RequestSent">
+        <qt:editorinfo scenegeometry="320.71;106.16;260.71;56.16;120;100" geometry="320.71;106.16;-60;-50;120;100"/>
+        <transition type="external" event="NewResponse" target="HandleResponse">
+            <qt:editorinfo movePoint="46.45;0"/>
+        </transition>
+    </state>
+    <state id="HandleResponse">
+        <qt:editorinfo scenegeometry="183.58;252.14;123.58;202.14;175.01;100" geometry="183.58;252.14;-60;-50;175.01;100"/>
+        <transition type="external" event="ResponseProcesed " target="Wait"/>
+    </state>
 </scxml>
