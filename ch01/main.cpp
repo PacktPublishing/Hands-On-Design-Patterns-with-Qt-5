@@ -10,7 +10,5 @@ int main(int argc, char *argv[])
     microscope->setYPos(-32.4);
     microscope->setFocusPoint(521.39);
 
-    auto image = microscope->CaptureImage();
-
 }
 

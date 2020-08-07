@@ -1,10 +1,15 @@
 #include "Microscope.h"
+#include <QDebug>
 
 Microscope *Microscope::m_instance = nullptr;
 
-//Microscope::Microscope()
-//{
-//}
+Microscope *Microscope::Instance()
+{
+    if (!m_instance) {
+        m_instance = new Microscope();
+    }
+    return m_instance;
+}
 
 double Microscope::focusPoint() const
 {
@@ -14,6 +19,7 @@ double Microscope::focusPoint() const
 void Microscope::setFocusPoint(double focusPoint)
 {
     m_focusPoint = focusPoint;
+    qDebug() << __FUNCTION__ << ": FocusPoint = " << m_focusPoint;
 }
 
 double Microscope::yPos() const
@@ -24,14 +30,7 @@ double Microscope::yPos() const
 void Microscope::setYPos(double yPos)
 {
     m_yPos = yPos;
-}
-
-Microscope *Microscope::Instance()
-{
-    if (!m_instance) {
-        m_instance = new Microscope();
-    }
-    return m_instance;
+    qDebug() << __FUNCTION__ << ": YPos = " << m_yPos;
 }
 
 double Microscope::xPos() const
@@ -42,4 +41,5 @@ double Microscope::xPos() const
 void Microscope::setXPos(double xPos)
 {
     m_xPos = xPos;
+    qDebug() << __FUNCTION__ << ": XPos = " << m_xPos;
 }

@@ -9,8 +9,6 @@ public:
     static Microscope * Instance();
     Microscope(const Microscope &right) = delete;
 
-    QImage CaptureImage();
-
     double xPos() const;
     void setXPos(double xPos);
 
