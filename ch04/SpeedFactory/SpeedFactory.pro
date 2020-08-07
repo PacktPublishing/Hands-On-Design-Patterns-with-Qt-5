@@ -1,6 +1,4 @@
-QT += core gui widgets
-QT += scxml
-QT += positioning
+QT += core gui widgets scxml positioning
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
