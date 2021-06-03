@@ -185,6 +185,9 @@ QVariant __SetPropValue(const QMetaProperty &prop, const OT &obj)
                           typename std::is_base_of<QObject, OT>::type());
 }
 
+// These need to be updated for Qt 6
+#if (QT_VERSION_MAJOR < 6)
+
 /// For streaming Dynamic Properties of a Q_GADGET
 template <typename OT>
 QTextStream &__DumpDynamicProperties(QTextStream & stream, const OT &obj, std::false_type)
@@ -809,5 +812,6 @@ template <class T> QVariant::Type __GetPropertyType(T &object, const char *name)
 {
     return __GetPropertyType(object, name, typename std::is_base_of<QObject, T>::type());
 }
+#endif  // QT_VERSION_MAJOR < 6
 
 #endif // PROPERTYCLASSTEMPLATES_H

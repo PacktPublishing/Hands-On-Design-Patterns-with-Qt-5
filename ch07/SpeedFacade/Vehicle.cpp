@@ -63,7 +63,8 @@ void Vehicle::adjustSpeed()
         m_speed = 200.0;
     }
 
-    m_heading += ((qrand() % 8) - 4);
+    auto randVal = QRandomGenerator::global()->generate();
+    m_heading += ((randVal % 8) - 4);
     if (m_heading > 360.0)
     {
         m_heading -= 360.0;
