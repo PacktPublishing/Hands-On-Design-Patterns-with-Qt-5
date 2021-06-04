@@ -26,18 +26,19 @@ public:
         return (m_name == right.m_name) && (m_data == right.m_data);
     }
 
-//    Topic &operator=(const Topic &right) {
-//        if (this != &right) {
-//            m_name = right.m_name;
-//            m_data = right.m_data;
-//        }
-//        return *this;
-//    }
+    Topic &operator=(const Topic &right) {
+        if (this != &right) {
+            m_name = right.m_name;
+            m_data = right.m_data;
+        }
+        return *this;
+    }
 
     bool isEmpty() { return m_name.isEmpty(); }
     bool isValid() { return m_name.isEmpty(); }
 };
 
 Q_DECLARE_METATYPE(Topic *)
+Q_DECLARE_METATYPE(Topic)
 
 #endif // TOPIC_H_INCLUDED

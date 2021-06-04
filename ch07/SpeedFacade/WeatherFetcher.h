@@ -11,11 +11,11 @@ class QNetworkReply;
 class QNetworkAccessManager;
 class QTimer;
 
-class WeatherFetcher : public QObject, public KnowledgeSource
+class WeatherFetcher : public KnowledgeSource
 {
     Q_OBJECT
 public:
-    explicit WeatherFetcher(QObject *parent = nullptr);
+    explicit WeatherFetcher();
 
     void setBlackboard(BlackboardFacade *a_blackboard) override;
 
@@ -42,6 +42,8 @@ signals:
                         double low);
 
 public slots:
+    void InitSelf();            ///< Self init in our own thread
+
     void start();               ///< (re)start updates
     void start(int secs);       ///< start updates after setting update secs
     void stop();                ///< stop getting updates

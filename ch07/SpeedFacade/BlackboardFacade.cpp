@@ -12,7 +12,8 @@ BlackboardFacade::BlackboardFacade(QObject *parent)
 
 Topic *BlackboardFacade::inspect(const QString &name)
 {
-    return value(name).value<Topic *>();
+    auto result = this->value(name).value<Topic *>();
+    return result;
 }
 
 void BlackboardFacade::update(Topic *a_topic)
@@ -23,4 +24,10 @@ void BlackboardFacade::update(Topic *a_topic)
 void BlackboardFacade::update(const QString &name, const QVariant &data)
 {
     update(new Topic(name, data));
+}
+
+void BlackboardFacade::handleUpdate(Topic a_topic)
+{
+    auto tp = new Topic(a_topic);
+    update(tp);
 }

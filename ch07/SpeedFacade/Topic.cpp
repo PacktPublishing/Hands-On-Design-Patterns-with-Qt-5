@@ -13,4 +13,5 @@ Topic::Topic(QString a_name, QVariant(a_data))
     : m_name(a_name), m_data(a_data)
 {
     qRegisterMetaType<Topic *>();
+    qRegisterMetaType<Topic>();
 };

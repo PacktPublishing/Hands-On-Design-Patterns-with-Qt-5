@@ -4,10 +4,23 @@
 #include <QGeoPositionInfo>
 #include <QGeoPositionInfoSource>
 #include <QDebug>
+#include <QThread>
 
-PositionSource::PositionSource(QObject *parent)
-    : QObject(parent),
-      KnowledgeSource()
+PositionSource::PositionSource()
+    : KnowledgeSource()
+{
+    auto thread = new QThread();
+    moveToThread(thread);
+    thread->start();
+
+    // At this point, we are still running in the thread of the creator of this
+    // instance.  We will not be running in our own thread until we recieve a
+    // Queued signal in our own slot.  To cause this, we send ourself a signal
+    // from a single shot QTimer after we leave this method.
+    QTimer::singleShot(1, this, &PositionSource::InitSelf);
+}
+
+void PositionSource::InitSelf()
 {
     // for windows 10, see if we have a position source, else fallback
     auto posSources = QGeoPositionInfoSource::availableSources();

@@ -1,5 +1,6 @@
 #include "FuelUsageCalc.h"
 #include <QTimer>
+#include <QThread>
 #include "BlackboardFacade.h"
 
 FuelUsageCalc::FuelUsageCalc()
@@ -7,7 +8,9 @@ FuelUsageCalc::FuelUsageCalc()
       m_fuelUsage(0.0),
       m_startTime()
 {
-    // nothing to do
+    auto thread = new QThread();
+    moveToThread(thread);
+    thread->start();
 }
 
 void FuelUsageCalc::setBlackboard(BlackboardFacade *a_blackboard)
@@ -24,18 +27,19 @@ void FuelUsageCalc::doTimedUpdate()
     auto tfuelUsage = m_blackboard->inspect("fuelUsage");
     auto ttime      = m_blackboard->inspect("time");
 
-    m_distance  = tdistance->data().toDouble();
-    m_fuelUsage = tfuelUsage->data().toDouble();
+    if (tdistance && tfuelUsage && ttime) {
+        m_distance  = tdistance->data().toDouble();
+        m_fuelUsage = tfuelUsage->data().toDouble();
 
-    postUpdate({"fuelPerDist", m_fuelUsage / m_distance});
-    postUpdate({"distPerFuel", m_distance / m_fuelUsage});
+        postUpdate({"fuelPerDist", m_fuelUsage / m_distance});
+        postUpdate({"distPerFuel", m_distance / m_fuelUsage});
 
-    auto time   = ttime->data().toDateTime();
-    auto secs = time.toSecsSinceEpoch() - m_startTime.toSecsSinceEpoch();
-    if (secs != 0) {
-        postUpdate(Topic {"fuelPerSec", m_fuelUsage / secs});
+        auto time   = ttime->data().toDateTime();
+        auto secs = time.toSecsSinceEpoch() - m_startTime.toSecsSinceEpoch();
+        if (secs != 0) {
+            postUpdate(Topic {"fuelPerSec", m_fuelUsage / secs});
+        }
     }
-
     // schedule update
     QTimer::singleShot(1000, [this] () { doTimedUpdate(); });
 }

@@ -4,9 +4,12 @@
 #include "KnowledgeSource.h"
 
 #include <QDateTime>
+#include <QObject>
 
 class FuelUsageCalc : public KnowledgeSource
 {
+    Q_OBJECT
+
 public:
     FuelUsageCalc();
 

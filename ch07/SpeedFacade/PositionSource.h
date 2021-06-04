@@ -7,14 +7,17 @@
 class QGeoPositionInfo;
 class QGeoPositionInfoSource;
 
-class PositionSource : public QObject, public KnowledgeSource
+class PositionSource : public KnowledgeSource
 {
     Q_OBJECT
 
 public:
-    PositionSource(QObject *parent = nullptr);
+    PositionSource();
 
     virtual void setBlackboard(BlackboardFacade *a_blackboard);
+
+public slots:
+    void InitSelf();
 
 private slots:
     void handlePositionUpdate(const QGeoPositionInfo &update);
