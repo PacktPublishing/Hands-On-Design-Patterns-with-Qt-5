@@ -18,6 +18,9 @@ public:
     Q_INVOKABLE Topic *inspect(const QString &name);
     Q_INVOKABLE void update(Topic *a_topic);
     Q_INVOKABLE void update(const QString &name, const QVariant &data);
+
+public slots:
+    void handleUpdate(Topic a_topic);
 };
 
 Q_DECLARE_METATYPE(BlackboardFacade *)

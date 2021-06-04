@@ -9,26 +9,40 @@
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 #include <QTimer>
+#include <QThread>
 
 
 #include <QDebug>
 
-WeatherFetcher::WeatherFetcher(QObject *parent) :
-    QObject(parent),
-    m_updateSecs(5 * 60),
-    m_minUpdateSecs(60)
+WeatherFetcher::WeatherFetcher()
+    : m_updateTimer(nullptr),
+      m_updateSecs(5 * 60),
+      m_minUpdateSecs(60),
+      m_netMan(nullptr)
+{
+    auto thread = new QThread();
+    moveToThread(thread);
+    thread->start();
+    // At this point, we are still running in the thread of the creator of this
+    // instance.  We will not be running in our own thread until we recieve a
+    // Queued signal in our own slot.  To cause this, we send ourself a signal
+    // from a single shot QTimer after we leave this method.
+    QTimer::singleShot(1, this, &WeatherFetcher::InitSelf);
+}
+
+void WeatherFetcher::InitSelf()
 {
     QSettings settings;
     setKey(settings.value("weather/key").toString());
     setUnits(settings.value("weather/units").toString());
 
-    m_updateTimer = new QTimer(reinterpret_cast<QObject*>(this));
+    m_updateTimer = new QTimer(this);
     m_updateTimer->setSingleShot(true);
     m_updateTimer->setInterval(m_updateSecs);
 
     connect(m_updateTimer, &QTimer::timeout, this, &WeatherFetcher::doUpdate);
 
-    m_netMan = new QNetworkAccessManager(reinterpret_cast<QObject*>(this));
+    m_netMan = new QNetworkAccessManager(this);
     connect(m_netMan, &QNetworkAccessManager::finished,
             this, &WeatherFetcher::handleApiResponse);
 }
@@ -175,24 +189,29 @@ void WeatherFetcher::doUpdate()
 {
     int updateTime = m_updateSecs * 1000;
 
-    auto qvarLat = m_blackboard->inspect("GPSLat")->data();
-    auto qvarLon = m_blackboard->inspect("GPSLon")->data();
+    auto latLookup = m_blackboard->inspect("GPSLat");
+    auto lonLookup = m_blackboard->inspect("GPSLon");
+    if (latLookup && lonLookup && m_netMan) {
+        auto qvarLat = latLookup->data();
+        auto qvarLon = lonLookup->data();
 
-    if (qvarLat.isValid() && qvarLon.isValid()) {
-        auto posLat = qvarLat.toDouble();
-        auto posLon = qvarLon.toDouble();
+        if (qvarLat.isValid() && qvarLon.isValid()) {
+            auto posLat = qvarLat.toDouble();
+            auto posLon = qvarLon.toDouble();
 
-        QString query = QStringLiteral("http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=%4")
-                .arg(posLat).arg(posLon).arg(m_key, m_units);
-        // qDebug() << query;
+            QString query = QStringLiteral("http://api.openweathermap.org/data/2.5/weather?lat=%1&lon=%2&appid=%3&units=%4")
+                                .arg(posLat).arg(posLon).arg(m_key, m_units);
+            // qDebug() << query;
 
-        m_netMan->get(QNetworkRequest(QUrl(query)));
+            m_netMan->get(QNetworkRequest(QUrl(query)));
 
-        m_lastUpdate = QDateTime::currentDateTime();
-    } else {
-        updateTime = 2000;
-        qWarning() << "Invalid Position, waiting";
+            m_lastUpdate = QDateTime::currentDateTime();
+        } else {
+            updateTime = 2000;
+            qWarning() << "Invalid Position, waiting";
+        }
     }
-
-    m_updateTimer->start(updateTime);
+    if (m_updateTimer) {
+        m_updateTimer->start(updateTime);
+    }
 }

@@ -42,6 +42,8 @@ DISTFILES += \
 
 STATECHARTS += \
     CruiseControlStateMachine.scxml \
+    FuelDisplayStateMachine.scxml \
+    HeadlightStateMachine.scxml \
     WeatherFetchigStateMachine.scxml
 
 HEADERS += \
