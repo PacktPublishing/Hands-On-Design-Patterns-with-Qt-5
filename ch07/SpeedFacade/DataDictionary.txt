@@ -1,0 +1,34 @@
+** DataDictionary.txt **
+
+
+
+This file lists all of the Topic names used in the system.  As a new topic
+is added, this file should be updated.
+
+class               name
+-----               ----
+FuelUsageCalc:      "fuelPerDist"
+FuelUsageCalc:      "distPerFuel"
+FuelUsageCalc:      "fuelPerSec"
+HeadlightSwitch:    "headlightState"
+PositionSource:     "GPSLon"
+PositionSource:     "GPSLat"
+PositionSource:     "GPSDir"
+PositionSource:     "GPSSpeed"
+PositionSource:     "GPSVSpeed"
+PositionSource:     "GPSLat"
+PositionSource:     "GPSLon"
+PositionSource:     "GPSDir"
+PositionSource:     "GPSSpeed"
+PositionSource:     "GPSVSpeed"
+Throttle:           "throttle"
+Vehicle:            "speed"
+Vehicle:            "accel"
+Vehicle:            "distance"
+Vehicle:            "heading"
+Vehicle:            "fuelUsage"
+WeatherFetcher:     "weatherForecast"
+WeatherFetcher:     "weatherDesc"
+WeatherFetcher:     "weatherTemp"
+WeatherFetcher:     "weatherHightemp"
+WeatherFetcher:     "weatherLowtemp"
