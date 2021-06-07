@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Extras 1.4
 
 Window {
-    id: window
+    id: dashboardDisplay
     width: 640
     height: 480
     visible: true
