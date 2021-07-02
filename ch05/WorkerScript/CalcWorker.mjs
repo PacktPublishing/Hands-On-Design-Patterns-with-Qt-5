@@ -16,14 +16,3 @@ WorkerScript.onMessage = (msg) => {
                                     newState : "done"})
     }
 }
-
-/*
- WorkerScript.onMessage = function(message) {
-     //Calculate result (may take a while, using a naive algorithm)
-     var calculatedResult = triangle(message.row, message.column);
-     //Send result back to main thread
-     WorkerScript.sendMessage( { row: message.row,
-                                 column: message.column,
-                                 result: calculatedResult} );
- }
-*/
