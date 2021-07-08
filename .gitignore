@@ -2,3 +2,4 @@
 *.user
 moc_*.h
 ui_*.h
+*/build-*

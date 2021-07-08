@@ -18,6 +18,10 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
+    // these identify the application (for QSettings)
+    app.setOrganizationName("Packt");
+    app.setApplicationName("SpeedFacade");
+
     // (1) Build the vehicle data sources
     QScopedPointer<BlackboardFacade> facade(new BlackboardFacade(nullptr));
 
@@ -49,10 +53,4 @@ int main(int argc, char *argv[])
 
     return app.exec();
 
-    // (4) Clean up in order
-    qDebug() << "---- Cleaning Up ----";
-//    weather->deleteLater();
-//    positionSource->deleteLater();
-//    fuelUsageCalc->deleteLater();
-//    vehicle->deleteLater();
 }
