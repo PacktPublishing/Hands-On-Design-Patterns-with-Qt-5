@@ -4,25 +4,24 @@ import QtQuick.Controls 2.15
 
 
 Window {
-    width: 640
-    height: 480
+    width: 400
+    height: 120
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("WorkerScript Example")
 
-    Item {
-        id: anItem
+    property int resultValue: 0
 
-        property int resultValue: 0
+    Button {
+        id: button
+        x: 40
+        y: 50
+        width: 120
+        height: 30
+        text: qsTr("Button")
+        state: "ready"
 
-        Button {
-            id: button
-            x: 177
-            y: 179
-            text: qsTr("Button")
-
-            onClicked: {
-                myWorker.sendMessage("doCalc1")
-            }
+        onClicked: {
+            myWorker.sendMessage("doCalc1")
         }
 
         states: [
@@ -39,10 +38,6 @@ Window {
                     target: button
                     text: "Running"
                 }
-                PropertyChanges {
-                    target: resultBox
-                    text: "---"
-                }
             },
             State {
                 name: "done"
@@ -52,38 +47,38 @@ Window {
                 }
                 PropertyChanges {
                     target: resultBox
-                    text: anItem.resultValue
+                    text: resultValue
                 }
             }
         ]
-
     }
 
     Text {
         id: resultBox
-        x: 324
-        y: 193
+        x: 200
+        y: 50
+        width: 160
+        height: 30
         text: "---"
         font.pixelSize: 12
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
     }
-
 
     WorkerScript {
         id: myWorker
         source: "CalcWorker.mjs"
 
         onMessage: ( workerMessage ) => {
-                       if (workerMessage.newState !== undefined) {
-                           anItem.state = workerMessage.newState
-                       }
-                       if (workerMessage.newText !== undefined) {
-                           resultBox.text = workerMessage.newText
-                       }
-                       if (workerMessage.result !== undefined) {
-                           anItem.resultValue = workerMessage.result
-                       }
-                   }
+            if (workerMessage.newState !== undefined) {
+                button.state = workerMessage.newState
+            }
+            if (workerMessage.newText !== undefined) {
+                resultBox.text = workerMessage.newText
+            }
+            if (workerMessage.result !== undefined) {
+                resultValue = workerMessage.result
+            }
+        }
     }
-
-
 }
