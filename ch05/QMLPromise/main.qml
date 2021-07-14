@@ -48,6 +48,48 @@ Window {
         anchors.bottomMargin: 0
     }
 
+    // (1) define our Promise
+    function myPromise(val) {
+        return new Promise((resolve, reject) => {
+                               if (val === 2) {
+                                   resolve('The correct value was entered: ' + val)
+                               } else {
+                                   reject('That is not the correct value: '+ val)
+                               }
+                           })
+    }
+
+    // (2) Method to execute if it is resolved
+    function passed(message) {
+        console.log("Passed : " + message);
+        resultText.text = "Yeah! " + message;
+    }
+
+    // (3) Method to execute if it is rejected
+    function failed(message) {
+        console.log("Failed : " + message);
+        resultText.text = "Boo! " + message;
+    }
+
+    // ** Score handling methods **
+    // (4) Reward passing by adding to score
+    function rewardPassed() {
+        score += 10;
+        console.log("rewardPassed : " + score);
+    }
+
+    // (5) Deduct 1 from score for trying
+    function deductTry() {
+        score -= 1;
+        console.log("deductTry : " + score);
+    }
+
+    // (6) Deduct 2 for getting the wrong value
+    function deductFail() {
+        score -= 2;
+        console.log("deductFail : " + score);
+    }
+
     Rectangle {
         id: rectangle
         color: "#caafff"
@@ -71,61 +113,21 @@ Window {
         }
         MouseArea {
             anchors.fill: parent
-
-            // (1) define our Promise
-            function myPromise(val) {
-                return new Promise((resolve, reject) => {
-                                       if (val === 2) {
-                                           resolve('The correct value was entered: ' + val)
-                                       } else {
-                                           reject('That is not the correct value: '+ val)
-                                       }
-                                   })
-            }
-
-            // (2) Method to execute if it is resolved
-            function passed(message) {
-                console.log("Passed : " + message);
-                resultText.text = "Yeah! " + message;
-            }
-
-            // (3) Method to execute if it is rejected
-            function failed(message) {
-                console.log("Failed : " + message);
-                resultText.text = "Boo! " + message;
-            }
-
-            // ** Score handling methods **
-            // (4) Reward passing by adding to score
-            function rewardPassed() {
-                score += 10;
-                console.log("rewardPassed : " + score);
-            }
-
-            // (5) Deduct 1 from score for trying
-            function deductTry() {
-                score -= 1;
-                console.log("deductTry : " + score);
-            }
-
-            // (6) Deduct 2 for getting the wrong value
-            function deductFail() {
-                score -= 2;
-                console.log("deductFail : " + score);
-            }
-
             // (7) What to do when the button is clicked
             onClicked: {
                 console.log("--- Guessing ---")
                 // (8) The cost of playing
-                deductTry();
+                mainWindow.deductTry();
 
                 // (9) Try 'myPromise' and then act appropriately
                 myPromise(Math.round(Math.random() * 10) % 5)
-                        .then(passed).then(rewardPassed)
-                        .catch(function(message) {failed(message); deductFail()})
-                        ;
+                .then(passed).then(rewardPassed)
+                .catch(function(message) {failed(message); deductFail()})
+                ;
             }
         }
     }
+
 }
+
+
