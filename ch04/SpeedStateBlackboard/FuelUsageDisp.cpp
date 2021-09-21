@@ -60,24 +60,24 @@ void FuelUsageDisp::updateMode()
 {
     if (m_modeSM)
     {
-        auto mode = m_modeSM->activeStateNames();
-        ui->fuelBox->setTitle(mode.first());
+        QStringList modeStates = m_modeSM->activeStateNames();
+        ui->fuelBox->setTitle(modeStates.first());
 
         QString numText = "----";
-        if (mode.contains("PerDistance"))
+        if (modeStates.contains("PerDistance"))
         {
             numText = QString::number(m_perDist, 'f', 4);
         }
-        else if (mode.contains("PerSecond"))
+        else if (modeStates.contains("PerSecond"))
         {
             numText = QString::number(m_perSec, 'f', 4);
 
         }
-        else if (mode.contains("Total"))
+        else if (modeStates.contains("Total"))
         {
             numText = QString::number(m_total, 'f', 6);
         }
-        else if (mode.contains("DistPerFuel"))
+        else if (modeStates.contains("DistPerFuel"))
         {
             numText = QString::number(m_perFuel, 'f', 6);
         }

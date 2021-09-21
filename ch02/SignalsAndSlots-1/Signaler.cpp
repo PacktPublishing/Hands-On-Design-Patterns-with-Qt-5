@@ -16,7 +16,7 @@ Signaler::Signaler(QObject *parent) : QObject(parent)
 
     connect(this, &Signaler::PersonSignal,          // sender
             [](Person p) {                          // lambda signal handler
-                qDebug() << "I also caught a person.";
+                qDebug() << "I caught" << p.name();
             });
 }
 

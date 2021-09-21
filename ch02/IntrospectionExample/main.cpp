@@ -69,8 +69,8 @@ int main(int argc, char *argv[])
     auto methodCount = metaObject.methodCount();
     for (int i = 0; i < methodCount; ++i)
     {
-        auto metaMethod = metaObject.method(i);
-        auto signature = metaMethod.methodSignature();
+        QMetaMethod metaMethod = metaObject.method(i);
+        QByteArray  signature = metaMethod.methodSignature();
 
         qDebug() << QString("%1::%2")
                         .arg(className)
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
     auto ciCount = metaObject.classInfoCount();
     for (int i = 0; i < ciCount; ++i)
     {
-        auto classInfo = metaObject.classInfo(i);
+        QMetaClassInfo classInfo = metaObject.classInfo(i);
         qDebug() << classInfo.name() << ":" << classInfo.value();
     }
 }
